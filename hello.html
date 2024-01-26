@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+
+      function handleClick(){
+        alert('Hola')
+      }
+
+      root.render(React.createElement('button', {onClick: handleClick}, 'presiona me'));
+    </script>
+  </body>
+</html>
