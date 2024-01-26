@@ -11,12 +11,12 @@
     <script>
       const container = document.getElementById('root');
       const root = ReactDOM.createRoot(container);
+      
+      const text = React.createElement('p', {}, 'Hello World')
+      const button = React.createElement('button', {}, 'Presiona me')
+      const page = React.createElement('section', {}, text, button)
 
-      function handleClick(){
-        alert('Hola')
-      }
-
-      root.render(React.createElement('button', {onClick: handleClick}, 'presiona me'));
+      root.render(page);
     </script>
   </body>
 </html>
