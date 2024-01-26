@@ -17,8 +17,8 @@
 
       const username = "papi";
 
-      function saluda() {
-        alert(`Hola ${username}`);
+      function saluda(usuario) {
+        alert(`Hola ${usuario}`);
       }
 
       const estilos = {
@@ -38,7 +38,7 @@
           >
             Hola {username}
           </h1>
-          <button onClick={saluda}> Saluda </button>
+          <button onClick={() => saluda("Tiburón")}> Saluda </button>
         </nav>
       );
 
