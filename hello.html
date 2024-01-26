@@ -12,22 +12,37 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-        const container = document.getElementById('root');
-        const root = ReactDOM.createRoot(container);
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
 
-        const username = "papi"
+      const username = "papi";
 
-        function saluda(){
-            alert(`Hola ${username}`)
-        }
-        const ui = (
-            <nav>
-                <h1> Hola { username } </h1>
-                <button onClick={saluda}> Saluda </button>
-            </nav>
-        );
-  
-        root.render(ui);
+      function saluda() {
+        alert(`Hola ${username}`);
+      }
+
+      const estilos = {
+        backgroundColor: "lightblue",
+        padding: "6px",
+        borderRadius: "6px",
+      };
+
+      const ui = (
+        <nav style={estilos}>
+          <h1
+            style={{
+              backgroundColor: "lightyellow",
+              padding: "6px",
+              borderRadius: "6px",
+            }}
+          >
+            Hola {username}
+          </h1>
+          <button onClick={saluda}> Saluda </button>
+        </nav>
+      );
+
+      root.render(ui);
     </script>
   </body>
 </html>
