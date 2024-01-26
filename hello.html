@@ -15,14 +15,17 @@
         const container = document.getElementById('root');
         const root = ReactDOM.createRoot(container);
 
+        const username = "papi"
+
+        function saluda(){
+            alert(`Hola ${username}`)
+        }
         const ui = (
-            <>
-                <div htmlFor="container"> Holisss</div>
-                <button className="botón-bonito"> Click uwu </button>
-            </>
+            <nav>
+                <h1> Hola { username } </h1>
+                <button onClick={saluda}> Saluda </button>
+            </nav>
         );
-        
-        <div htmlFor="container"> Holisss </div>
   
         root.render(ui);
     </script>
