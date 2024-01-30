@@ -15,9 +15,14 @@
       const container = document.getElementById("root");
       const root = ReactDOM.createRoot(container);
 
-      //Usando componentes (Funciones que regresan JSX)
-      //En este caso estamos usando props para acceder a las etiquetas (username en este caso)
-      function Saludar(props) {
+      //Usando componentes (Funciones que regresan JSX, UI, )
+      //En este caso estamos usando componentes al que le pasamos propiedades y una es por defecto (age)
+      function Saludar({username, age=18}) {
+
+        if (!username) {
+          return <p>No hay usuario</p>
+        }
+
         return (
           <section
             style={{
@@ -35,7 +40,7 @@
                 borderRadius: "6px",
               }}
             >
-              Hola {props.username}
+              Hola {username}, tienes {age} años.
             </h1>
           </section>
         );
@@ -54,9 +59,10 @@
 
       const ui = (
         <div>
-          <Saludar username="alejandro" />
-          <Saludar username="pedro" />
+          <Saludar username="alejandro" age="14" />
+          <Saludar username="pedro" age="35"/>
           <Saludar username="el misa" />
+          <Saludar />
           <Profile />
         </div>
       );
