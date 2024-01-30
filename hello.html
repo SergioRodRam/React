@@ -16,7 +16,8 @@
       const root = ReactDOM.createRoot(container);
 
       //Usando componentes (Funciones que regresan JSX)
-      function Saludar() {
+      //En este caso estamos usando props para acceder a las etiquetas (username en este caso)
+      function Saludar(props) {
         return (
           <section
             style={{
@@ -34,7 +35,7 @@
                 borderRadius: "6px",
               }}
             >
-              Hola Lion
+              Hola {props.username}
             </h1>
           </section>
         );
@@ -53,7 +54,9 @@
 
       const ui = (
         <div>
-          <Saludar />
+          <Saludar username="alejandro" />
+          <Saludar username="pedro" />
+          <Saludar username="el misa" />
           <Profile />
         </div>
       );
