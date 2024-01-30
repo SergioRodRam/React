@@ -15,10 +15,9 @@
       const container = document.getElementById("root");
       const root = ReactDOM.createRoot(container);
 
-      //Usando componentes (Funciones que regresan JSX, UI, )
-      //En este caso estamos usando componentes al que le pasamos propiedades
-      //También usamos el conditional render para cuando no se pase la edad
-      function Saludar({ username, age }) {
+      //Usando componentes (Funciones que regresan JSX, UI, HTML)
+      //En este caso estamos usando componentes al que le pasamos children's
+      function Saludar({ children }) {
         return (
           <section
             style={{
@@ -36,8 +35,7 @@
                 borderRadius: "6px",
               }}
             >
-              Hola {username}
-              {!!age ? `, tienes ${age} años` : ""}.
+              {children}
             </h1>
           </section>
         );
@@ -60,12 +58,15 @@
 
       const ui = (
         <div>
-          <Saludar username="alejandro" age="14" />
-          <Saludar username="pedro" age="35" />
-          <Saludar username="el misa" />
-          <Saludar />
-
-          <Profile />
+          <Saludar>
+            Hola oscar
+          </Saludar>
+          <Saludar>
+            <h1>Hola oscar</h1>
+          </Saludar>
+          <Saludar>
+            <button>Hola Pablo</button>
+          </Saludar>
         </div>
       );
 
