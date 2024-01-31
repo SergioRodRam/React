@@ -15,56 +15,16 @@
       const container = document.getElementById("root");
       const root = ReactDOM.createRoot(container);
 
-      //Usando componentes (Funciones que regresan JSX, UI, HTML)
-      //En este caso estamos usando componentes al que le pasamos children's props
-      function Saludar({}) {
-        //En esta parte creamos un arreglo de objetos (users)
-        //Usamos el map para recorrer el arreglo de objetos
-        //Usamos key para identificar cada uno de los elementos
-        //En este caso, el id es único para cada usuario
-        const users = [
-          { id: 1, name: "Pablo", age: 25 },
-          { id: 2, name: "Oscar", age: 32 },
-          { id: 3, name: "Katherine", age: 28 },
-          { id: 4, name: "Omar", age: 35 },
-          { id: 5, name: "Cristian", age: 30 },
-        ];
-
-        return (
-          <section
-            style={{
-              backgroundColor: "lightblue",
-              padding: "6px",
-              borderRadius: "6px",
-              fontFamily: "sans-serif",
-              margin: "4px",
-            }}
-          >
-            {users.map((user) => (
-              <h1 key={user.id}> Hola {user.name} </h1>
-            ))}
-          </section>
-        );
-      }
-
-      function Profile() {
-        return (
-          <img
-            style={{
-              width: "150px",
-              height: "150px",
-              borderRadius: "50%",
-              objectFit: "cover",
-            }}
-            src="https://i.imgur.com/MK3eW3Am.jpg"
-            alt="Katherine Johnson"
-          />
-        );
-      }
-
+      // Creamos la UI para mostrar un h1 y un p con el tiempo
+      // ademas agregamos un evento para mostrar un alert (click)
+      // y un evento para mostrar un console.log (mouseover)
       const ui = (
-        <div>
-          <Saludar />
+        <div
+          onClick={() => alert("Hello World")}
+          onMouseOver={() => console.log("Entramos ...")}
+        >
+          <h1>Hello World</h1>
+          <p>It is {new Date().toLocaleTimeString()}.</p>
         </div>
       );
 
