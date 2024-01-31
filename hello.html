@@ -15,20 +15,25 @@
       const container = document.getElementById("root");
       const root = ReactDOM.createRoot(container);
 
-      // Creamos la UI para mostrar un h1 y un p con el tiempo
-      // ademas agregamos un evento para mostrar un alert (click)
-      // y un evento para mostrar un console.log (mouseover)
-      const ui = (
-        <div
-          onClick={() => alert("Hello World")}
-          onMouseOver={() => console.log("Entramos ...")}
-        >
-          <h1>Hello World</h1>
-          <p>It is {new Date().toLocaleTimeString()}.</p>
-        </div>
-      );
+      // Hacemos uso de state con React
+      // Creamos un controlador de estado con React.useState
+      function Counter() {
+        const [count, setCount] = React.useState(0);
 
-      root.render(ui);
+        console.log("render");
+
+        // Cada vez que cambia el estado, se renderiza el componente
+        return (
+          <div>
+            <h1>Count: {count}</h1>
+            <button onClick={() => setCount((now) => now + 1)}> +1 </button>
+            <button onClick={() => setCount((now) => now - 1)}> -1 </button>
+            <button onClick={() => setCount(0)}> Reset </button>
+          </div>
+        );
+      }
+
+      root.render(<Counter />);
     </script>
   </body>
 </html>
