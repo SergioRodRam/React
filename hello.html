@@ -18,31 +18,27 @@
       // Hacemos uso de state con React
       // Creamos un controlador de estado con React.useState
       function Counter({ cuentaInicial }) {
-        const [count, setCount] = React.useState(cuentaInicial);
-
-        function handeClickPlus3() {
-          //Estas funciones harían "0 + 1" 3 veces (la forma no correcta de hacerlo, es asíncrono)
-          //setCount(count + 1);
-          //setCount(count + 1);
-          //setCount(count + 1);
-
-          //Estas funciones harán "actual + 1 + 1 + 1" (la forma correcta de hacerlo)
-          setCount((c) => c + 1);
-          console.log({count});   //Imprimen el valor de count antes de que cambie
-          setCount((c) => c + 1);
-          console.log({count});   //Imprimen el valor de count antes de que cambie
-          setCount((c) => c + 1);
-          console.log({count});   //Imprimen el valor de count antes de que cambie
-        }
+        const [count, setCount] = React.useState(0);
+        const [frase, setFrase] = React.useState("Hola");
 
         // Cada vez que cambia el estado, se renderiza el componente
         return (
           <div>
             <h1>Count: {count}</h1>
-            <button onClick={handeClickPlus3}> +3 </button>
+            <h1>Frase: {frase}</h1>
+
             <button onClick={() => setCount((now) => now + 1)}> +1 </button>
             <button onClick={() => setCount((now) => now - 1)}> -1 </button>
-            <button onClick={() => setCount(0)}> Reset </button>
+
+            {count < 10 ? (
+              <>
+                <button onClick={() => setCount(0)}> Reset </button>
+                <button onClick={() => setCount(100)}> 100 </button>
+              </>
+            ) : null}
+
+            <button onClick={() => setFrase("Adios")}> Adios</button>
+            <button onClick={() => setFrase("Hola")}> Hola</button>
           </div>
         );
       }
