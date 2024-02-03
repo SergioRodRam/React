@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="mx">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TODO LIST</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <style>
+    body {
+      margin: 0rem;
+    }
+  </style>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+
+      function ToDo({ id, titulo, completado, onChange }) {
+        return (
+          <div
+            key={id}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: " 10vw",
+              textDecoration: completado ? "line-through" : "none",
+            }}
+          >
+            <li>{titulo}</li>
+            <input type="checkbox" checked={completado} onChange={onChange} />
+          </div>
+        );
+      }
+
+      //En esta versión se crea el componente de la lista de tareas y se renderiza cada que se pasa un parámetro al input 
+      function ListToDo() {
+        const [tareas, setTareas] = React.useState([]);
+        const [titulo, setTitulo] = React.useState("");
+
+        function crearNuevaTarea(titulo) {
+          if (!titulo) {
+            return;
+          }
+          const newTodo = {
+            id: Math.random().toString(),
+            titulo,
+            completado: false,
+          };
+
+          /* Version larga */
+          //const newTodos = [newTodo, ...tareas];
+          //setTareas(newTodos);
+          setTareas((actualToDos) => [newTodo, ...actualToDos]);
+        }
+
+        function handleCheck(event, id) {
+          const checked = event.target.checked;
+
+          setTareas((actualToDos) => {
+            const newTodos = [...actualToDos];
+            newTodos.find((t) => t.id === id).completado = checked;
+
+            const sortedTodos = [
+              ...newTodos.filter((t) => !t.completado),
+              ...newTodos.filter((t) => t.completado),
+            ];
+
+            return sortedTodos;
+          });
+        }
+
+        return (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "white",
+            }}
+          >
+            <h1>Lista de Tareas</h1>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+
+                setTitulo("");
+                crearNuevaTarea(titulo);
+              }}
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                gap: "1.5rem",
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Agregar Tarea"
+                value={titulo}
+                onChange={(event) => setTitulo(event.target.value)}
+              />
+              <button>Agregar</button>
+            </form>
+
+            <ul>
+              {tareas.map((tarea) => (
+                <ToDo
+                  id={tarea.id}
+                  titulo={tarea.titulo}
+                  completado={tarea.completado}
+                  onChange={() => handleCheck(event, tarea.id)}
+                />
+              ))}
+            </ul>
+          </div>
+        );
+      }
+
+      function Card({ children }) {
+        return (
+          <div
+            style={{
+              backgroundColor: "#288463",
+              boxShadow: "var(--shadow-elevation-low)",
+              border: "1px solid white",
+              borderRadius: "1rem",
+              padding: "1rem",
+            }}
+          >
+            {children}
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100vh",
+              backgroundColor: "lightblue",
+            }}
+          >
+            <Card>
+              <ListToDo />
+            </Card>
+          </div>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
