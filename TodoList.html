@@ -29,13 +29,22 @@
             key={id}
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              width: "100%",
+              justifyContent: "space-around",
               alignItems: "center",
-              width: " 10vw",
-              textDecoration: completado ? "line-through" : "none",
             }}
           >
-            <li>{titulo}</li>
+            {completado ? "✅ " : "❌"}
+            <li
+              style={{
+                width: "60%",
+                textAlign: "center",
+                textDecoration: completado ? "line-through" : "none",
+                overflowWrap: "break-word",
+              }}
+            >
+              {titulo}
+            </li>
             <input type="checkbox" checked={completado} onChange={onChange} />
           </div>
         );
@@ -179,11 +188,16 @@
 
             <NewToDo onNewToDo={crearNuevaTarea} />
 
-            <NewToDo2 onNewToDo={crearNuevaTarea} />
-
-            <NewToDo3 onNewToDo={crearNuevaTarea} />
-
-            <ul>
+            <ul
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: "40vw",
+                listStyle: "none",
+                padding: 0,
+              }}
+            >
               {tareas.map((tarea) => (
                 <ToDo
                   id={tarea.id}
