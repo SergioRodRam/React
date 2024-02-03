@@ -41,12 +41,99 @@
         );
       }
 
-      //En esta versión se crea el componente de la lista de tareas y se renderiza cada que se pasa un parámetro al input 
-      function ListToDo() {
-        const [tareas, setTareas] = React.useState([]);
+      //En esta versión hacemos uso de un forms para crear una nueva tarea (Se recomienda esta versión 👍🏻)
+      function NewToDo({ onNewToDo }) {
         const [titulo, setTitulo] = React.useState("");
 
+        //Deshabilita el botón si el input esta vacío
+        return (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              setTitulo("");
+              onNewToDo(titulo);
+            }}
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              gap: "1.5rem",
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Agregar Tarea"
+              value={titulo}
+              onChange={(event) => setTitulo(event.target.value)}
+            />
+            <button disabled={titulo.length === 0}>Agregar</button>
+          </form>
+        );
+      }
+
+      //En esta versión hacemos uso de un forms para crear una nueva tarea
+      function NewToDo2({ onNewToDo }) {
+        return (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const input = e.target.elements[0];
+              const tarea = input.value;
+              input.value = "";
+
+              onNewToDo(tarea);
+            }}
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              gap: "1.5rem",
+            }}
+          >
+            <input type="text" placeholder="agregar Tarea" />
+            <button>Agregar</button>
+          </form>
+        );
+      }
+
+      //En esta versión hacemos uso de un input para crear una nueva tarea
+      function NewToDo3({ onNewToDo }) {
+        const [titulo, setTitulo] = React.useState("");
+
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              gap: "1.5rem",
+            }}
+          >
+            <input
+              type="text"
+              placeholder="agregar Tarea"
+              value={titulo}
+              onChange={(event) => setTitulo(event.target.value)}
+            />
+            <button
+              onClick={() => {
+                onNewToDo(titulo);
+                setTitulo("");
+              }}
+            >
+              Agregar
+            </button>
+          </div>
+        );
+      }
+
+      //En esta versión se crea el componente de la lista de tareas y se renderiza cada que se pasa un parámetro al input
+      function ListToDo() {
+        const [tareas, setTareas] = React.useState([]);
+
         function crearNuevaTarea(titulo) {
+          //Validación de que no tenga un valor vacío (Por si no se valida en el forms)
           if (!titulo) {
             return;
           }
@@ -78,6 +165,7 @@
           });
         }
 
+        //Cada vez que cambia el estado, se renderiza el componente (búsqueda en tiempo real cuando se escribe en el input)
         return (
           <div
             style={{
@@ -89,28 +177,11 @@
           >
             <h1>Lista de Tareas</h1>
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
+            <NewToDo onNewToDo={crearNuevaTarea} />
 
-                setTitulo("");
-                crearNuevaTarea(titulo);
-              }}
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                gap: "1.5rem",
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Agregar Tarea"
-                value={titulo}
-                onChange={(event) => setTitulo(event.target.value)}
-              />
-              <button>Agregar</button>
-            </form>
+            <NewToDo2 onNewToDo={crearNuevaTarea} />
+
+            <NewToDo3 onNewToDo={crearNuevaTarea} />
 
             <ul>
               {tareas.map((tarea) => (
